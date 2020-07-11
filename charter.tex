@@ -1,37 +1,37 @@
 \documentclass[11pt]{charter}
 
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\titulo{Título del proyecto} 
+\titulo{Sistema de ensayos de relés ferroviarios de seguridad basado en computación en la nube}
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
-\posgrado{Carrera de Especialización en Sistemas Embebidos} 
-%\posgrado{Carrera de Especialización en Internet de las Cosas} 
+\posgrado{Carrera de Especialización en Sistemas Embebidos}
+%\posgrado{Carrera de Especialización en Internet de las Cosas}
 %\posgrado{Carrera de Especialización en Intelegencia Artificial}
-%\posgrado{Maestría en Sistemas Embebidos} 
+%\posgrado{Maestría en Sistemas Embebidos}
 %\posgrado{Maestría en Internet de las cosas}
 
 % Tu nombre, se puede usar el cualquier lugar del documento con el comando \authorname
-\autor{Nombre del Autor} 
+\autor{Gaspar Santamarina}
 
 % El nombre del director y co-director, se puede usar el cualquier lugar del documento con el comando \supname y \cosupname y \pertesupname y \pertecosupname
 \director{Nombre del Director}
-\pertenenciaDirector{pertenencia} 
+\pertenenciaDirector{pertenencia}
 % FIXME:NO IMPLEMENTADO EL CODIRECTOR ni su pertenencia
-\codirector{} % si queda vacio no se deberíá incluir 
+\codirector{} % si queda vacio no se deberíá incluir
 \pertenenciaCoDirector{}
 
 % Nombre del cliente, quien va a aprobar los resultados del proyecto, se puede usar con el comando \clientename y \empclientename
-\cliente{Nombre del cliente}
-\empresaCliente{Empresa del cliente}
+\cliente{-}
+\empresaCliente{CONICET-GICSAFe}
 
 % Nombre y pertenencia de los jurados, se pueden usar el cualquier lugar del documento con el comando \jurunoname, \jurdosname y \jurtresname y \perteunoname, \pertedosname y \pertetresname.
 \juradoUno{Nombre y Apellido (1)}
-\pertenenciaJurUno{pertenencia (1)} 
+\pertenenciaJurUno{pertenencia (1)}
 \juradoDos{Nombre y Apellido (2)}
 \pertenenciaJurDos{pertenencia (2)}
 \juradoTres{Nombre y Apellido (3)}
 \pertenenciaJurTres{pertenencia (3)}
- 
+
 \fechaINICIO{22 de junio de 2020}		%Fecha de inicio de la cursada de GdP \fechaInicioName
 \fechaFINALPlanificacion{22 de Agosto de 2020} 	%Fecha de final de cursada de GdP
 \fechaFINALTrabajo{22 de diciembre de 2020}		%Fecha de defensa pública del trabajo final
@@ -63,12 +63,7 @@
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios realizados} & Fecha      \\ \hline
-1.0      & Creación del documento                                                          & 22/06/2020 \\ \hline
-1.1      & Ejemplo de un texto muy largo que debiera ocupar más de una línea para que tengan de ejemplo                                                                                																						   & dd/mm/aaaa \\ \hline
-1.2      & Otro ejemplo \newline
-		   Con texto partido \newline
-		   En varias líneas \newline
-		   A propósito                                                                     & dd/mm/aaaa \\ \hline
+1.0      & Creación del documento: propósito, alcance, supuestos\newline                                                        y tareas & 09/07/2020 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -85,7 +80,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en el prototipo preliminar de un\textcolor{red}{... completar con una descripción de una o dos líneas}, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo y \textcolor{red}{\$XXX}, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+%Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en el prototipo preliminar de un\textcolor{red}{... completar con una descripción de una o dos líneas}, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo y \textcolor{red}{\$XXX}, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -108,54 +103,46 @@ Se adjunta a esta acta la planificación inicial.
 \section{Descripción técnica-conceptual del Proyecto a realizar}
 \label{sec:descripcion}
 
-\begin{consigna}{red}
-El objetivo es que el lector en una o dos páginas entienda de qué se trata el proyecto y cuáles son sus desafíos, su motivación y su importancia.
-Se debe destacar claramente cuál es el valor que agrega el proyecto a realizar. ``El presente proyecto se destaca especialmente por incorporar tal cosa... Esto lo diferencia de otros sistemas similares en que ...''
+Las barreras automáticas de los pasos a nivel y los sistemas de cambios de vía del sistema ferroviario de la Argentina dependen mayormente de componentes  electromecánicos. Estos componentes deben cumplir altos niveles de seguridad para alcanzar la fiabilidad necesaria. Un componente importante de estos sistemas son los relés de señalamiento, llamados también relés de seguridad (“safety relays” en inglés) o relés vitales (“vital relays” en inglés).
 
-Puede ser útil incluir en esta sección la respuesta a alguna de estas preguntas:
+Un único paso a nivel automático puede emplear decenas de relés. Estos solo se consiguen por importación y cada uno tiene un valor superior a los U\$S 1,000 (mil dólares estadounidenses). Es conveniente entonces el desarrollo de una industria nacional que fabrique relés certificados; un sistema de ensayos de relés es una parte esencial para elaborar una certificación local.
 
-\begin{itemize}
-\item ¿Cómo se vincula este proyecto con la misión de la organización?
-\item ¿Cómo se inserta este proyecto en el modelo de negocio de la organización?
-\item ¿Ayuda a la explicación si se incluye un lienzo Canvas del Modelo de Negocio?
-\item ¿En qué estado del ciclo de vida está el producto que se desea reemplazar o mejorar?
-\item ¿Cuales son las necesidades que debe satisfacer?
-\item ¿Por dónde pasa la innovación?
-\end{itemize}
+El diseño del sistema de ensayos de relés se basa en la norma UNE-EN 50578. En la misma se establecen valores máximos y mínimos en las variaciones de los valores iniciales de la corriente de excitación, la corriente de caída y el factor K. El sistema de ensayos de relés debe permitir el monitoreo de estos valores eléctricos.
 
-La descripción técnica-conceptual \textbf{debe incluir al menos un diagrama en bloques del sistema }y una frase como la siguiente: ``En la Figura \ref{fig:diagBloques} se presenta el diagrama en bloques del sistema. Se observa que...''. Luego recién más abajo de haber puesto esta frase se pone la figura. La regla es que las figuras nunca pueden ir antes de ser mencionadas en el texto, porque sino el lector no entiende por qué de pronto aparece una figura.
+En la Figura \ref{fig:diagBloques2} se puede ver la arquitectura completa del sistema, incluyendo el servidor remoto encargado de monitorear el ensayo a lo largo de todo el proceso.
 
 \vspace{25px}
 
-\begin{figure}[htpb]
+\begin{figure}[H]
 \centering 
-\includegraphics[width=.7\textwidth]{./Figuras/diagBloques.png}
+\includegraphics[width=.6\textwidth]{./Figuras/bloques.png}
 \caption{Diagrama en bloques del sistema}
-\label{fig:diagBloques}
+\label{fig:diagBloques2}
 \end{figure}
 
 \vspace{25px}
 
-El tamaño de la tipografía en la figura debe ser adecuado para que NO pase lo que ocurre acá, donde el lector debe esforzarse para poder leer el texto. Los colores usados en el diagrama deben ser adecuados, tal que ayuden a comprender mejor el diagrama.
-\end{consigna}
+El firmware correrá sobre 3 placas CIAA-NXP en simultáneo para asegurar los niveles de disponibilidad deseados. Sobre cada una de las CIAA-NXP se monta una placa de lógica no programable. Este subsistema cuenta entre otras con las siguientes funciones:
 
+\begin{itemize}
+\item Generar la señal de activación del relé (incluyendo los transistores de potencia y circuitos de activación correspondientes).
+\item Realizar la sincronización automática de las señales de activación del relé generadas por tres placas independientes entre sí.
+\item Detectar cuando una de las tres placas falla y en ese caso desconectarla del relé en forma automática.
+\item Realizar la medición de múltiples valores de voltaje y corriente asociados al funcionamiento del relé. Estos valores son el voltaje aplicado al bobinado del relé y la corriente que circula, junto con los valores de voltaje aplicado y la corriente que circula por cada contacto. Se ensayarán relés que usualmente cuentan con hasta seis contactos normal cerrado y seis contactos normal abierto.
+\item Mostrar indicaciones luminosas relativas al estado del sistema mediante diodos LED.
+\item Establecer una comunicación MQTT sobre TCP/IP con el broker para recibir los comandos del usuario y enviar, en tiempo real, los datos recabados.
+\end{itemize}
+
+Para cumplir con los requerimientos de la norma, el sistema debe ser capaz de realizar los siguientes ensayos:
+
+\begin{itemize}
+\item \textbf{Sistema magnético, corriente de excitación y corriente de caída:} la corriente de excitación se define como la corriente mínima a través de la bobina que, partiendo de un valor nulo, alcanza para mover la armadura de la posición de reposo a la posición de trabajo y para aplicar la fuerza de contacto especificada por el fabricante, cerrando todos los contactos de trabajo. La corriente de caída es la corriente máxima a través de la bobina que, partiendo del valor de la corriente nominal, produce la apertura de todos los contactos de trabajo. Este ensayo permite medir el factor K. Para esto se debe generar una función de rampa que, luego de ser amplificada, se aplica al bobinado del relé.
+\item \textbf{Ensayo de vida útil mecánica:} este ensayo es en vacío. El usuario puede ingresar la cantidad de ciclos a ensayar siendo el valor máximo de $10 \cdot 10^6$ movimientos porque la norma se cumple cuando se llega esta cantidad de ciclos. Este ensayo registra la corriente y el voltaje del bobinado y el estado de los contactos.
+\item \textbf{Ensayo con carga:} este ensayo se realiza aplicando el voltaje nominal los contactos abiertos y la corriente nominal a los contactos cerrados. A la bobina del relé también se le aplica el voltaje nominal. La norma dice que en estas condiciones se debe asegurar una cantidad mínima de $2 \cdot 10^6$ movimientos durante la vida útil del relé. En este ensayo se registran los voltajes y las corrientes de la bobina y los voltajes y las corrientes de los contactos.
+\end{itemize}
 
 \section{Identificación y análisis de los interesados}
 \label{sec:interesados}
-
-\begin{consigna}{red} 
-Nota: (borrar esto y todas las consignas en color rojo antes de entregar este documento).
- 
-Es inusual que una misma persona esté en más de un rol, incluso en proyectos chicos.
- 
-Si se considera que una persona cumple dos o más roles, entonces sólo dejarla en el rol más importante. Por ejemplo:
-
-\begin{itemize}
-\item Si una persona es Cliente pero también colabora u orienta, dejarla solo como Cliente.
-\item Si una persona es el Responsable, no debe ser colocado también como Miembro del equipo.
-\end{itemize}
-
-Pero en cambio sí es usual que el Cliente y el Auspiciante sean el mismo, por ejemplo.
 
 \begin{table}[ht]
 %\caption{Identificación de los interesados}
@@ -164,75 +151,33 @@ Pero en cambio sí es usual que el Cliente y el Auspiciante sean el mismo, por e
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
-Auspiciante   &                   &              	&        	\\ \hline
-Cliente       & \clientename      &\empclientename	&        	\\ \hline
-Impulsor      &                   &              	&        	\\ \hline
-Responsable   & \authorname       & FIUBA        	& Alumno 	\\ \hline
-Colaboradores &                   &              	&        	\\ \hline
-Orientador    & \supname	      & \pertesupname 	& Director	Trabajo final \\ \hline
-Equipo        & miembro1 \newline 
-				miembro2          &              	&        	\\ \hline
-Opositores    &                   &              	&        	\\ \hline
-Usuario final &                   &              	&        	\\ \hline
+Cliente       & \clientename      &\empclientename	& -       	\\ \hline
+Impulsor      & \clientename      &\empclientename	& -       	\\ \hline
+Responsable   & \authorname       & CESE 12Co2020 	& Alumno 	\\ \hline
+Orientador    & \supname	       & \pertesupname 	& Director	Trabajo final \\ \hline
+Usuario final & -				   & Trenes Argentinos S.E.      	& -      	\\ \hline
 \end{tabularx}
+\textbf{CONICET-GICSAFe:} Grupo de Investigación en Calidad y Seguridad de las Aplicaciones Ferroviarias
 \end{table}
-
-El Director suele ser uno de los Orientadores.
-
-No dejar celdas vacías; si no hay nada que poner en una celda colocar un signo ``-''.
-
-No dejar filas vacías; si no hay nada que poner en una fila entonces eliminarla.
-
-Sería deseable listar a continuación de la tabla las principales características de cada interesado.
- 
-Por ejemplo:
-\begin{itemize}
-\item Auspiciante: es riguroso y exigente con la rendición de gastos. Tener mucho cuidado con esto.
-\item Equipo: Juan Perez, suele pedir licencia porque tiene un familiar con una enfermedad. Planificar considerando esto.
-\item Orientador: María Gómez, nos va a poder ayudar mucho con la gestión de impuestos.
-\end{itemize}
-
-\end{consigna}
-
-
 
 \section{1. Propósito del proyecto}
 \label{sec:proposito}
 
-\begin{consigna}{red}
-¿Por qué se hace el proyecto? ¿Qué se quiere lograr? 
-
-Se recomienda que sea solo un párrafo que empiece diciendo ``El propósito de este proyecto es...''.
-\end{consigna}
+El propósito de este proyecto es desarrollar el firmware para un probador de relés de seguridad ferroviarios. El mismo deberá comunicarse con un servidor remoto, desde el cuál se configurarán e iniciarán las pruebas. Además, deberá reportar en tiempo real el estado de las pruebas, junto con las mediciones que la conforman.
 
 \section{2. Alcance del proyecto}
 \label{sec:alcance}
 
-\begin{consigna}{red}
-¿Qué se incluye y que no se incluye en este proyecto?
-
-Se refiere al trabajo a hacer para entregar el producto o resultado especificado. 
-
-Explicitar todo lo quede comprendido dentro del alcance del proyecto.
-
-Explicitar además todo lo que no quede incluido (``El presente proyecto no incluye...'')
-
-\end{consigna}
-
+Se diseñará e implementará el firmware capaz de realizar, junto con el hardware, las tres pruebas mencionadas anteriormente en la descripción técnica del proyecto. 
+En la entrega final no se incluirá el desarrollo de hardware del probador ni el software del servidor remoto.
 
 \section{3. Supuestos del proyecto}
 \label{sec:supuestos}
 
-\begin{consigna}{red}
-``Para el desarrollo del presente proyecto se supone que: ...''
-
 \begin{itemize}
-\item Supuesto 1
-\item Supuesto 2...
+\item Se contará con el hardware terminado al arrancar con el desarrollo de firmware.
+\item Se dispondrá, en una etapa avanzada del desarrollo, de un servidor de pruebas con las funcionalidades mínimas requeridas por el probador.
 \end{itemize}
-
-Por ejemplo, se podrían incluir supuestos respecto a disponibilidad de tiempo y recursos humanos y materiales, sobre la factibilidad técnica de distintos aspectos del proyecto, sobre otras cuestiones que sean necesarias para el éxito del proyecto como condiciones macroeconómicas o reglamentarias.
-\end{consigna}
 
 \section{4. Requerimientos}
 \label{sec:requerimientos}
@@ -268,59 +213,48 @@ Y al escribirlos seguir las siguientes reglas:
 \item Ser específico: no dejar lugar a confusiones.
 \item Expresar los requerimientos en términos que sean cuantificables y medibles.
 \end{itemize}
-
 \end{consigna}
 
 \section{5. Entregables principales del proyecto}
 \label{sec:entregables}
 
-\begin{consigna}{red}
-Cosas como: 
 \begin{itemize}
-\item Manual de uso
-\item Diagrama esquemático
-\item Código fuente
-\item Diagrama de instalación
-\item Informe final
-
+\item Código fuente del firmware
+\item Informe de avance
+\item Memoria del trabajo
 \end{itemize}
-
-\end{consigna}
 
 \section{6. Desglose del trabajo en tareas}
 \label{sec:wbs}
 
-\begin{consigna}{red}
-Se recomienda mostrar el WBS mediante una lista indexada:
-
 \begin{enumerate}
-\item Grupo de tareas 1
+\item Planificación \hfill (45 hs)
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
+	\item Estudio del funcionamiento básico de un probador \hfill (25 hs)
+	\item Elaboración del documento de Planificación del proyecto \hfill (20 hs)
 	\end{enumerate}
-\item Grupo de tareas 2
+\item Desarrollo de firmware \hfill (187 hs)
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
+	\item Desarrollo del driver para el ADC \hfill (32 hs)
+	\item Diseño de la arquitectura general y el flujo de datos. \hfill (16 hs)
+	\item Diseño de las tareas (tasks) que ejecutará el RTOS y los mecanismos \newline de comunicación entre ellas.  \hfill (35 hs)
+	\item Desarrollo del módulo de adquisición  \hfill (32 hs)
+	\item Desarrollo del módulo de almacenamiento SD  \hfill (32 hs)
+	\item Desarrollo del módulo de comunicación  \hfill (40 hs)
 	\end{enumerate}
-	\item Grupo de tareas 3
+\item Verificación y Validación \hfill (55 hs)
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
-	\item Tarea 4 (tantas hs)
-	\item Tarea 5 (tantas hs)
+	\item Pruebas de firmware \hfill (20 hs)
+	\item Pruebas de integración con el hardware \hfill (35 hs)
+	\end{enumerate}
+\item Documentación \hfill (60 hs)
+	\begin{enumerate}
+	\item Elaboración de la Memoria del trabajo \hfill (40 hs)
+	\item Producción de la presentación final \hfill (20 hs)
 	\end{enumerate}
 \end{enumerate}
 
-Cantidad total de horas: (tantas hs)
-
-Se recomienda que no haya ninguna tarea que lleve más de 40 hs. 
-
-\end{consigna}
+Cantidad total de horas: (347 hs)
 
 \section{7. Diagrama de Activity On Node}
 \label{sec:AoN}
