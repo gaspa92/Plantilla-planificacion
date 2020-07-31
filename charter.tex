@@ -1,5 +1,7 @@
 \documentclass[11pt]{charter}
 
+\newcommand{\forceindent}{\leavevmode{\parindent=4em\indent}}
+
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
 \titulo{Sistema de ensayos de relés ferroviarios de seguridad basado en computación en la nube}
 
@@ -11,18 +13,18 @@
 %\posgrado{Maestría en Internet de las cosas}
 
 % Tu nombre, se puede usar el cualquier lugar del documento con el comando \authorname
-\autor{Gaspar Santamarina}
+\autor{Ing. Gaspar Santamarina}
 
 % El nombre del director y co-director, se puede usar el cualquier lugar del documento con el comando \supname y \cosupname y \pertesupname y \pertecosupname
-\director{Nombre del Director}
-\pertenenciaDirector{pertenencia}
+\director{Ing. Adrián Laiuppa}
+\pertenenciaDirector{CONICET-GICSAFe}
 % FIXME:NO IMPLEMENTADO EL CODIRECTOR ni su pertenencia
-\codirector{} % si queda vacio no se deberíá incluir
-\pertenenciaCoDirector{}
+\codirector{Mg. Ing. Martin Menendez} % si queda vacio no se deberíá incluir
+\pertenenciaCoDirector{CONICET-GICSAFe}
 
 % Nombre del cliente, quien va a aprobar los resultados del proyecto, se puede usar con el comando \clientename y \empclientename
-\cliente{-}
-\empresaCliente{CONICET-GICSAFe}
+\cliente{Martín Harris}
+\empresaCliente{Trenes Argentinos}
 
 % Nombre y pertenencia de los jurados, se pueden usar el cualquier lugar del documento con el comando \jurunoname, \jurdosname y \jurtresname y \perteunoname, \pertedosname y \pertetresname.
 \juradoUno{Nombre y Apellido (1)}
@@ -34,7 +36,7 @@
 
 \fechaINICIO{22 de junio de 2020}		%Fecha de inicio de la cursada de GdP \fechaInicioName
 \fechaFINALPlanificacion{22 de Agosto de 2020} 	%Fecha de final de cursada de GdP
-\fechaFINALTrabajo{22 de diciembre de 2020}		%Fecha de defensa pública del trabajo final
+\fechaFINALTrabajo{22 de junio de 2021}		%Fecha de defensa pública del trabajo final
 
 
 \begin{document}
@@ -64,6 +66,8 @@
 \rowcolor[HTML]{C0C0C0} 
 Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios realizados} & Fecha      \\ \hline
 1.0      & Creación del documento: propósito, alcance, supuestos\newline                                                        y tareas & 09/07/2020 \\ \hline
+1.1      & Se agrega AoN, diagrama Gantt, matriz de recursos,\newline
+presupuesto y matriz de responsabilidades & 30/07/2020 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -71,7 +75,7 @@ Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios 
 
 
 
-\section{Acta de Constitución del Proyecto}
+\section{Acta de constitución del proyecto}
 \label{sec:acta}
 
 \begin{flushright}
@@ -80,7 +84,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-%Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en el prototipo preliminar de un\textcolor{red}{... completar con una descripción de una o dos líneas}, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo y \textcolor{red}{\$XXX}, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en el prototipo preliminar de un probador de relés ferroviarios de seguridad, basado en hardware digital, con la posibilidad de ser operado de forma remota, y tendrá un presupuesto preliminar estimado de 687 hs de trabajo, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -144,18 +148,18 @@ Para cumplir con los requerimientos de la norma, el sistema debe ser capaz de re
 \section{Identificación y análisis de los interesados}
 \label{sec:interesados}
 
-\begin{table}[ht]
+\begin{table}[H]
 %\caption{Identificación de los interesados}
 %\label{tab:interesados}
 \begin{tabularx}{\linewidth}{@{}|l|X|X|l|@{}}
 \hline
 \rowcolor[HTML]{C0C0C0} 
-Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
-Cliente       & \clientename      &\empclientename	& -       	\\ \hline
-Impulsor      & \clientename      &\empclientename	& -       	\\ \hline
-Responsable   & \authorname       & CESE 12Co2020 	& Alumno 	\\ \hline
-Orientador    & \supname	       & \pertesupname 	& Director	Trabajo final \\ \hline
-Usuario final & -				   & Trenes Argentinos S.E.      	& -      	\\ \hline
+Rol           & Nombre y Apellido & Organización 	  & Puesto 	\\ \hline
+Cliente       & \clientename      &\empclientename	  & \shortstack {Coordinador General\\de Desarrollo,\\de la Subgerencia\\de Desarrollo y\\Normas Técnicas}\\ \hline
+Responsable   & \authorname       & CESE 12Co2020 	  & Alumno 	\\ \hline
+Orientador    & \supname	       & \pertesupname 	  & Director	Trabajo final \\ \hline
+\multirow{2}{*}{Colaboradores} & Ing. Nicolás Locatelli & CONICET-GICSAFe & \shortstack[l]{Integrante} \\ \cline{2-4}
+& Ing. Gustavo Ramoscelli & CONICET-GICSAFe & \shortstack[l]{Investigador} \\ \hline
 \end{tabularx}
 \textbf{CONICET-GICSAFe:} Grupo de Investigación en Calidad y Seguridad de las Aplicaciones Ferroviarias
 \end{table}
@@ -182,38 +186,107 @@ En la entrega final no se incluirá el desarrollo de hardware del probador ni el
 \section{4. Requerimientos}
 \label{sec:requerimientos}
 
-\begin{consigna}{red}
-Los requerimientos deben numerarse y de ser posible agruparlos por afinidad:
-
 \begin{enumerate}
-\item Grupo de requerimientos asociados con...
+\item Interfaces Externas
 	\begin{enumerate}
-	\item Requerimiento 1
-	\item Requerimiento 2
-	\item Requerimiento 3 (prioridad menor)
+	\item El sistema deberá ser capaz de leer el estado de 5 señales digitales.
+	\item El sistema deberá leer 15 señales analógicas a través de 2 integrados ADC externos.
+	\item El sistema deberá leer 2 señales analógicas a través de 2 ADC internos.
+	\item El sistema deberá leer el estado de un pin digital.
+	\item El sistema deberá controlar el estado de 2 pines digitales.
+	\item El sistema deberá comunicarse con la tarjeta MicroSD presente en el hardware.
+	\item El sistema deberá hacer uso de un puerto Ethernet para conectarse a Internet.
+	\item El sistema deberá ser capaz de generar una rampa de tensión configurable.
 	\end{enumerate}
-\item Grupo de requerimientos asociados con...
+\item Funciones
 	\begin{enumerate}
-	\item Requerimiento 1
-	\item Requerimiento 2 (prioridad menor)
+	\item El sistema debe ser capaz de enviar notificaciones de alerta al servidor remoto, generadas por el disparo de una señal de alerta del hardware.
+	\item El sistema debe ser capaz de enviar notificaciones de alerta al servidor remoto, generadas por sobretensión en cualquiera de las entradas analógicas.
+	\item El sistema debe ser capaz de interpretar los siguientes comandos enviados desde el servidor:
+		\begin{enumerate}
+		\item Aplicar configuración de sistema.
+		\item Definir los parámetros asociados a cada tipo de ensayo.
+		\item Disparar ensayos.
+		\item Parar ensayos.
+		\end{enumerate}
+	\item El sistema deberá ser capaz de ejecutar los siguientes ensayos:
+		\begin{enumerate}
+		\item \textbf{Sistema magnético, corriente de excitación y corriente de caída:} Se genera una rampa de tensión de pendiente positiva y luego otra de pendiente negativa. El valor inicial, valor final, paso de tensión y duración del paso de las señales deben ser configurables en ambos casos, además de la máxima corriente de excitación admitida. Se debe notificar al servidor entre paso y paso, indicando la tensión instantánea de la rampa y el valor de las 17 señales analógicas. La prueba finaliza al completarse la cantidad de repeticiones especificadas al inicio de la prueba.
+		\item \textbf{Ensayo de vida útil mecánica con y sin carga:} Se debe especificar el número de ciclos. Al detectarse la secuencia de inicio se comienzan a contabilizar los ciclos, representados por el periodo entre cada secuencia de inicio. Se debe notificar al servidor cada vez que ocurre un flanco positivo de las señales CLOCK\_1S o CLOCK\_3S, indicando el número de ciclo y el valor de las 17 señales analógicas. La prueba finaliza al completarse la cantidad de ciclos especificados al inicio de la prueba.
+		\end{enumerate}
+	\item Junto con cada paquete de datos generado a partir de una prueba, se debe anexar un ID que identifique el tipo de prueba.
+	\item Junto con cada paquete de datos se debe anexar una marca temporal y un ID que identifique a la placa dentro de las tres placas que conforman el sistema.
+	\item Cada paquete de datos debe ser almacenado en una tarjeta MicroSD a modo de copia de seguridad.
+	\item El sistema debe permitir realizar distintos tipos de ensayos en forma intercalada.
+	\item El sistema debe permitir configurar los siguientes parámetros:
+		\begin{enumerate}
+		\item Hora del sistema.
+		\item URL y puerto del broker MQTT.
+		\end{enumerate}
+	\end{enumerate}
+\item Requisitos de Rendimiento
+	\begin{enumerate}
+	\item Para el ensayo de rampa se deben permitir hasta 25 ciclos.
+	\item Para el ensayo de vida útil mecánica \textbf{sin carga} se deben permitir hasta $10 \cdot 10^6$ ciclos.
+	\item Para el ensayo de vida útil mecánica \textbf{con carga} se deben permitir hasta $2 \cdot 10^6$ ciclos.
+	\item Para el ensayo de vida útil mecánica el periodo máximo entre ciclos es de 3 segundos.
+	\end{enumerate}
+\item Restricciones de Diseño
+	\begin{enumerate}
+	\item Se usará I$^2$C como protocolo de comunicación con los ADC.
+	\item Se usará SPI como protocolo de comunicación con la SD.
+	\item Se usará MQTT sobre TCP/IP como protocolo de comunicación con el servidor remoto.
+	\item Se usará JSON como formato de texto para intercambio de datos con el servidor remoto.
+	\item La rampa de tensión debe ser capaz de alcanzar un valor máximo de hasta 10V.
+	\item Se usará la plataforma CIAA-NXP como placa de desarrollo.
+	\item Se usará un RTC para mantener la hora de forma local.
+	\item Se usará ``Unix time'' como formato de marca temporal. 
+	\end{enumerate}
+\item Atributos del Sistema
+	\begin{enumerate}
+	\item El sistema debe ser capaz de funcionar de forma ininterrumpida durante 2 años.
+	\item El sistema debe hacer uso de cifrado TLS para la capa de transporte.
+	\item El sistema debe hacer uso de Usuario/Contraseña para autenticarse con el broker MQTT.
+	\item El desarrollo de software debe seguir una metodología acorde a la norma UNE-EN 50128.
+	\end{enumerate}
+\item Otros Requisitos
+	\begin{enumerate}
+	\item El desarrollo debe ser documentado utilizando la herramienta Doxygen.
 	\end{enumerate}
 \end{enumerate}
 
-Leyendo los requerimientos se debe poder interpretar cómo será el proyecto y su funcionalidad.
+%\subsubsection*{4.1 Especificación de formato de archivos JSON}
+%\label{sec:espec_json}
+%
+%A continuación se detallan los pares nombre/valor para los distintos archivos JSON que se intercambiarán entre firmware y servidor. Algunos son comunes a todos los mensajes mientras que otros dependen del comando en cuestión.
+%
+%\textbf{Pares nombre/valor comunes a todos los JSON:}
+%
+%\textbf{``board\_id''}\textit{(integer)}: Número de placa.\\
+%\textbf{``cmd''}\textit{(string)}: Cadena que identifica al comando. Los posibles comandos son: \\
+%	\forceindent test\_config = Configuración del ensayo.\\
+%	\forceindent test\_start = Disparo del ensayo.\\
+%	\forceindent test\_stop = Parada del ensayo.\\
+%\textbf{``params''}\textit{(object)}: Dentro de este objeto se anidan los parámetros asociados al comando. \\
+%
+%\textbf{Parámetros específicos:}
+%
+%\underline{\Large test\_config:}\\
+%\textbf{``type''}\textit{(integer)}: Tipo de ensayo.\\
+%	\forceindent 1 = Sistema magnético, corriente de excitación y corriente de caída.\\
+%	\forceindent 2 = Ensayo de vida útil mecánica sin carga.\\
+%	\forceindent 3 = Ensayo de vida útil mecánica con carga.\\
+%\textbf{``cycles''}\textit{(integer)}: Número de ciclos a repetir.\\
+%{\large - Parámetros específicos del ensayo tipo 1:}\\
+%\textbf{``vem''}\textit{(integer)}: Tensión máxima de la rampa [V].\\
+%\textbf{``inom''}\textit{(integer)}: Corriente nominal [mA].\\
+%\textbf{``step''}\textit{(integer)}: Salto de voltaje [mV].\\
+%\textbf{``dt''}\textit{(integer)}: Duración del paso [ms].\\
+%\textbf{``ip\_max''}\textit{(integer)}: Máxima corriente de excitación admitida [mA].\\
+%
+%\underline{\Large test\_start:}\\
+%\textbf{``type''}\textit{(integer)}: Tipo de ensayo.\\
 
-De ser posible indicar cómo se obtuvieron cada uno de los requerimientos 
-
-Indicar claramente cuál es la prioridad entre los distintos requerimientos. 
-
-No olvidarse de que los requerimientos incluyen a las regulaciones y normas vigentes!!!
-
-Y al escribirlos seguir las siguientes reglas:
-\begin{itemize}
-\item Ser breve y conciso (nadie lee cosas largas). 
-\item Ser específico: no dejar lugar a confusiones.
-\item Expresar los requerimientos en términos que sean cuantificables y medibles.
-\end{itemize}
-\end{consigna}
 
 \section{5. Entregables principales del proyecto}
 \label{sec:entregables}
@@ -228,119 +301,113 @@ Y al escribirlos seguir las siguientes reglas:
 \label{sec:wbs}
 
 \begin{enumerate}
-\item Planificación \hfill (45 hs)
+\item Planificación \hfill (55 hs)
 	\begin{enumerate}
-	\item Estudio del funcionamiento básico de un probador \hfill (25 hs)
-	\item Elaboración del documento de Planificación del proyecto \hfill (20 hs)
+	\item Estudio del funcionamiento básico de un probador. \hfill (25 hs)
+	\item Elaboración del documento de Planificación del proyecto. \hfill (30 hs)
 	\end{enumerate}
-\item Desarrollo de firmware \hfill (187 hs)
+\item Pruebas preliminares \hfill (80 hs)
 	\begin{enumerate}
-	\item Desarrollo del driver para el ADC \hfill (32 hs)
-	\item Diseño de la arquitectura general y el flujo de datos. \hfill (16 hs)
-	\item Diseño de las tareas (tasks) que ejecutará el RTOS y los mecanismos \newline de comunicación entre ellas.  \hfill (35 hs)
-	\item Desarrollo del módulo de adquisición  \hfill (32 hs)
-	\item Desarrollo del módulo de almacenamiento SD  \hfill (32 hs)
-	\item Desarrollo del módulo de comunicación  \hfill (40 hs)
+	\item Desarrollo del prototipo de firmware. \hfill (25 hs)
+	\item Pruebas de interacción con el hardware. \hfill (35 hs)
+	\item Pruebas de comunicación con el servidor. \hfill (20 hs)
 	\end{enumerate}
-\item Verificación y Validación \hfill (55 hs)
+\item Diseño de firmware \hfill (100 hs)
 	\begin{enumerate}
-	\item Pruebas de firmware \hfill (20 hs)
-	\item Pruebas de integración con el hardware \hfill (35 hs)
+	\item Diseño de la arquitectura general y el flujo de datos. \hfill (35 hs)
+	\item Diseño de las tareas del RTOS y los mecanismos \newline de comunicación entre ellas.  \hfill (35 hs)
+	\item Configuración del entorno de desarrollo. \hfill (15 hs)
+	\item Estudio de las herramientas de software disponibles para la plataforma \newline de desarrollo elegida. \hfill (15 hs)
+	\end{enumerate}
+\item Implementación de firmware \hfill (229 hs)
+	\begin{enumerate}
+	\item Desarrollo del driver para los ADC. \hfill (25 hs)
+	\item Desarrollo del módulo de adquisición. \hfill (32 hs)
+	\item Desarrollo del driver ethernet. \hfill (40 hs)
+	\item Desarrollo del módulo de comunicación. \hfill (40 hs)
+	\item Desarrollo del módulo de almacenamiento SD.  \hfill (32 hs)
+	\item Desarrollo del módulo de detección de estados. \hfill (20 hs)
+	\item Desarrollo del módulo de control principal. \hfill (40 hs)
+	\end{enumerate}
+\item Verificación y Validación \hfill (163 hs)
+	\begin{enumerate}
+	\item Pruebas individuales de los módulos de firmware.  \hfill (30 hs)
+	\item Ensayos de integración del firmware.  \hfill (20 hs)
+	\item Pruebas de integración con el hardware. \hfill (20 hs)
+	\item Ensayos funcionales. \hfill (40 hs)
+	\item Análisis de los efectos de los errores de software. \hfill (20 hs)
+	\item Demostración formal. \hfill (8 hs)
+	\item Elaboración del informe de validación. \hfill (25 hs)
 	\end{enumerate}
 \item Documentación \hfill (60 hs)
 	\begin{enumerate}
-	\item Elaboración de la Memoria del trabajo \hfill (40 hs)
-	\item Producción de la presentación final \hfill (20 hs)
+	\item Elaboración de la Memoria del trabajo. \hfill (40 hs)
+	\item Producción de la presentación final. \hfill (20 hs)
 	\end{enumerate}
 \end{enumerate}
 
-Cantidad total de horas: (347 hs)
+Cantidad total de horas: (687 hs)
 
 \section{7. Diagrama de Activity On Node}
 \label{sec:AoN}
 
-\begin{consigna}{red}
-Armar el AoN a partir del WBS definido en la etapa anterior. 
-
-%La figura \ref{fig:AoN} fue elaborada con el paquete latex tikz y pueden consultar la siguiente referencia \textit{online}:
-
-%\url{https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ:_A_Tutorial_for_Beginners_(Part_3)\%E2\%80\%94Creating_Flowcharts}
-
-\end{consigna}
-
-\begin{figure}[htpb]
+\begin{figure}[H]
 \centering 
-\includegraphics[width=.8\textwidth]{./Figuras/AoN.png}
+\includegraphics[width=.8\textwidth]{./Figuras/AoN2.png}
 \caption{Diagrama en \textit{Activity on Node}}
 \label{fig:AoN}
 \end{figure}
 
-Indicar claramente en qué unidades están expresados los tiempos.
-De ser necesario indicar los caminos semicríticos y analizar sus tiempos mediante un cuadro.
-Es recomendable usar colores y un cuadro indicativo describiendo qué representa cada color, como se muestra en el siguiente ejemplo:
-
-
-
 \section{8. Diagrama de Gantt}
 \label{sec:gantt}
 
-\begin{consigna}{red}
-Utilizar el software Gantter for Google Drive o alguno similar para dibujar el diagrama de Gantt.
-
-Existen muchos programas y recursos \textit{online} para hacer diagramas de gantt, entre las cuales destacamos:
-
-\begin{itemize}
-\item Planner
-\item GanttProject
-\item Trello + \textit{plugins}. En el siguiente link hay un tutorial oficial: \\ \url{https://blog.trello.com/es/diagrama-de-gantt-de-un-proyecto}
-\item Creately, herramienta online colaborativa. \\\url{https://creately.com/diagram/example/ieb3p3ml/LaTeX}
-\item Se puede hacer en latex con el paquete \textit{pgfgantt}\\ \url{http://ctan.dcc.uchile.cl/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf}
-\end{itemize}
-
-Pegar acá una captura de pantalla del diagrama de Gantt, cuidando que la letra sea suficientemente grande como para ser legible. 
-Si el diagrama queda demasiado ancho, se puede pegar primero la ``tabla'' del Gantt y luego pegar la parte del diagrama de barras del diagrama de Gantt.
-
-Configurar el software para que en la parte de la tabla muestre los códigos del EDT (WBS).\\
-Configurar el software para que al lado de cada barra muestre el nombre de cada tarea.\\
-Revisar que la fecha de finalización coincida con lo indicado en el Acta Constitutiva.
-
-En la figura \ref{fig:gantt}, se muestra un ejemplo de diagrama de gantt realizado con el paquete de \textit{pgfgantt}. En la plantilla pueden ver el código que lo genera y usarlo de base para construir el propio.
-
-\begin{figure}[htbp]
 \begin{center}
-\begin{ganttchart}{1}{12}
-  \gantttitle{2020}{12} \\
-  \gantttitlelist{1,...,12}{1} \\
-  \ganttgroup{Group 1}{1}{7} \\
-  \ganttbar{Task 1}{1}{2} \\
-  \ganttlinkedbar{Task 2}{3}{7} \ganttnewline
-  \ganttmilestone{Milestone o hito}{7} \ganttnewline
-  \ganttbar{Final Task}{8}{12}
-  \ganttlink{elem2}{elem3}
-  \ganttlink{elem3}{elem4}
-\end{ganttchart}
-\end{center}
-\caption{Diagrama de gantt de ejemplo}
+\includegraphics[width=0.95\textwidth, angle=180]{./Figuras/gantt-0.jpg}
+\captionof{figure}{Diagrama de gantt}
 \label{fig:gantt}
-\end{figure}
+\end{center}
 
-\end{consigna}
+\begin{center}
+\includegraphics[width=0.95\textwidth, angle=180]{./Figuras/gantt-1.jpg}
+\captionof{figure}{Diagrama de gantt (continuación)}
+\label{fig:gantt}
+\end{center}
 
 \section{9. Matriz de uso de recursos de materiales}
 \label{sec:recursos}
 
-
-\begin{table}[htpb]
+\begin{table}[H]
 \label{tab:recursos}
 \centering
-\begin{tabularx}{\linewidth}{@{}|c|X|X|X|X|X|@{}}
+\begin{tabularx}{\linewidth}{@{}|c|X|c|c|@{}}
 \hline
-\cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0} & \multicolumn{4}{c|}{\cellcolor[HTML]{C0C0C0}Recursos requeridos (horas)} \\ \cline{3-6} 
-\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Código\\ WBS\end{tabular}} & \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Nombre \\ tarea\end{tabular}} & Material 1 & Material 2 & Material 3 & Material 4 \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
+\cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0} & \multicolumn{2}{c|}{\cellcolor[HTML]{C0C0C0}Recursos requeridos (horas)} \\ \cline{3-4} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}WBS} & \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Nombre de la tarea\end{tabular}} & PC & Probador+CIAA \\ \hline
+ 1.1 & Estudio del funcionamiento básico de un probador & 25 & 10 \\ \hline
+ 1.2 & Elaboración del documento de planificación del proyecto & 30 & \\ \hline
+ 2.1 & Desarrollo del prototipo de firmware & 25 & 10 \\ \hline
+ 2.2 & Pruebas de interacción con el hardware & 35 & 10\\ \hline
+ 2.3 & Pruebas de comunicación con el servidor & 20 & \\ \hline
+ 3.1 & Diseño de la arquitectura general y el flujo de datos & 35 & \\ \hline
+ 3.2 & Diseño de las tareas del RTOS y los mecanismos de comunicación entre ellas & 35 & \\ \hline
+ 3.3 & Configuración del entorno de desarrollo & 15 & \\ \hline
+ 3.4 & Estudio de las herrameintas de software disponible para la plataforma de desarrollo elegida & 15 & \\ \hline
+ 4.1 & Desarrollo del driver para los ADC & 25 & 15 \\ \hline
+ 4.2 & Desarrollo del módulo de adquisición & 32 & 5 \\ \hline
+ 4.3 & Desarrollo del driver ethernet & 40 & 5 \\ \hline
+ 4.4 & Desarrollo del módulo de comunicación & 40 & \\ \hline
+ 4.5 & Desarrollo del módulo de almacenamiento SD & 32 & 5 \\ \hline
+ 4.6 & Desarrollo del módulo de detección de estados & 20 & 5 \\ \hline
+ 4.7 & Desarrollo del módulo de control principal & 40 & \\ \hline
+ 5.1 & Pruebas individuales de los módulos de firmware & 30 & 10 \\ \hline
+ 5.2 & Ensayos de integración del firmware & 20 & 20 \\ \hline
+ 5.3 & Pruebas de integración con el hardware & 20 & 20 \\ \hline
+ 5.4 & Ensayos funcionales & 40 & 40 \\ \hline
+ 5.5 & Análisis de los efectos de los errores de software 20 & 15 & \\ \hline
+ 5.6 & Demostración formal & 8 & 8 \\ \hline
+ 5.7 & Elaboración del informe de validación & 25 & \\ \hline 
+ 6.1 & Elaboración de la memoria de trabajo & 40 & \\ \hline 
+ 6.2 & Producción de la presentación final & 20 & \\ \hline 
 \end{tabularx}%
 \end{table}
 
@@ -348,18 +415,7 @@ En la figura \ref{fig:gantt}, se muestra un ejemplo de diagrama de gantt realiza
 \section{10. Presupuesto detallado del proyecto}
 \label{sec:presupuesto}
 
-\begin{consigna}{red}
-Si el proyecto es complejo entonces separarlo en partes:
-\begin{itemize}
-\item Un total global, indicando el subtotal acumulado por cada una de las áreas.
-\item El desglose detallado del subtotal de cada una de las áreas.
-\end{itemize}
-
-IMPORTANTE: No olvidarse de considerar los COSTOS INDIRECTOS.
-
-\end{consigna}
-
-\begin{table}[htpb]
+\begin{table}[H]
 \centering
 \begin{tabularx}{\linewidth}{@{}|X|c|r|r|@{}}
 \hline
@@ -370,43 +426,19 @@ Descripción &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
- &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} \\ \hline
- &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
+CIAA-NXP                 & 1        & \$ 25.600  & \$ 25.600  \\  \hline
+Poncho Probador de relés & 1        & \$ 12.693        & \$ 12.693     \\ \hline
+Mano de obra             & 687 hs   & \$ 850     & \$ 583.950 \\ \hline
 \multicolumn{3}{|c|}{SUBTOTAL} &
-  \multicolumn{1}{c|}{} \\ \hline
+  \multicolumn{1}{c|}{\$ 622.243} \\ \hline
 \rowcolor[HTML]{C0C0C0} 
 \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}COSTOS INDIRECTOS} \\ \hline
-\rowcolor[HTML]{C0C0C0} 
+\rowcolor[HTML]{C0C0C0}
 Descripción &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
+30\% de los costos directos & N/A & N/A & \$ 186.673  \\  \hline
 \multicolumn{3}{|c|}{SUBTOTAL} &
   \multicolumn{1}{c|}{} \\ \hline
 \rowcolor[HTML]{C0C0C0}
@@ -418,35 +450,57 @@ Descripción &
 
 \section{11. Matriz de asignación de responsabilidades}
 \label{sec:responsabilidades}
-\begin{consigna}{red}
-Establecer la matriz de asignación de responsabilidades y el manejo de la autoridad completando la siguiente tabla:
 
 \begin{table}[htpb]
 \centering
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{|c|c|c|c|c|c|}
+\begin{tabular}{|c|m{6cm}|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{C0C0C0} 
 \cellcolor[HTML]{C0C0C0} &
   \cellcolor[HTML]{C0C0C0} &
-  \multicolumn{4}{c|}{\cellcolor[HTML]{C0C0C0}Listar todos los nombres y roles del proyecto} \\ \cline{3-6} 
+  \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}Nombres y roles del proyecto} \\ \cline{3-6} 
 \rowcolor[HTML]{C0C0C0} 
 \cellcolor[HTML]{C0C0C0} &
   \cellcolor[HTML]{C0C0C0} &
   Responsable &
   Orientador &
-  Equipo &
+  Colaborador &
+  Colaborador &
   Cliente \\ \cline{3-6} 
 \rowcolor[HTML]{C0C0C0} 
 \multirow{-3}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Código\\ WBS\end{tabular}} &
   \multirow{-3}{*}{\cellcolor[HTML]{C0C0C0}Nombre de la tarea} &
   \authorname &
   \supname &
-  Nombre de alguien &
+  Ing. Nicolás Locatelli &
+  Ing. Gustavo Ramoscelli &
   \clientename \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
+ 1.1 & Estudio del funcionamiento básico de un probador & P & C & & & \\ \hline
+ 1.2 & Elaboración del documento de planificación del proyecto & P & A & & & I \\ \hline
+ 2.1 & Desarrollo del prototipo de firmware & P & C & & & \\ \hline
+ 2.2 & Pruebas de interacción con el hardware & P & C & & & \\ \hline
+ 2.3 & Pruebas de comunicación con el servidor & P & & C & C & \\ \hline
+ 3.1 & Diseño de la arquitectura general y el flujo de datos & P & & & & \\ \hline
+ 3.2 & Diseño de las tareas del RTOS y los mecanismos de comunicación entre ellas & P & & & & \\ \hline
+ 3.3 & Configuración del entorno de desarrollo & P & & & & \\ \hline
+ 3.4 & Estudio de las herrameintas de software disponible para la plataforma de desarrollo elegida & P & & & & \\ \hline
+ 4.1 & Desarrollo del driver para los ADC & P & C & & & \\ \hline
+ 4.2 & Desarrollo del módulo de adquisición & P & I & & & \\ \hline
+ 4.3 & Desarrollo del driver ethernet & P & & & & \\ \hline
+ 4.4 & Desarrollo del módulo de comunicación & P & & I & I & \\ \hline
+ 4.5 & Desarrollo del módulo de almacenamiento SD & P & I & & & \\ \hline
+ 4.6 & Desarrollo del módulo de detección de estados & P & C & & & \\ \hline
+ 4.7 & Desarrollo del módulo de control principal & P & I & & & \\ \hline
+ 5.1 & Pruebas individuales de los módulos de firmware & P & & & & \\ \hline
+ 5.2 & Ensayos de integración del firmware & P & I & & & \\ \hline
+ 5.3 & Pruebas de integración con el hardware & P & A & & & \\ \hline
+ 5.4 & Ensayos funcionales & P & A & A & A & A \\ \hline
+ 5.5 & Análisis de los efectos de los errores de software & P & C & & & \\ \hline
+ 5.6 & Demostración formal & P & A & I & I & A \\ \hline
+ 5.7 & Elaboración del informe de validación & P & A & & & \\ \hline 
+ 6.1 & Elaboración de la memoria de trabajo & P & A & & & \\ \hline 
+ 6.2 & Producción de la presentación final & P & A & & & \\ \hline 
 \end{tabular}%
 }
 \end{table}
@@ -461,13 +515,6 @@ Referencias:
 	\item C = Consultado
 \end{itemize}
 } %footnotesize
-
-Una de las columnas debe ser para el Director, ya que se supone que participará en el proyecto.
-A su vez se debe cuidar que no queden muchas tareas seguidas sin ``A'' o ``I''.
-
-Importante: es redundante poner ``I/A'' o ``I/C'', porque para aprobarlo o responder consultas primero la persona debe ser informada.
-
-\end{consigna}
 
 \section{12. Gestión de riesgos}
 \label{sec:riesgos}
