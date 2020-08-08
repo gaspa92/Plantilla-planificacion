@@ -2,6 +2,8 @@
 
 \newcommand{\forceindent}{\leavevmode{\parindent=4em\indent}}
 
+\usepackage{tcolorbox}
+
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
 \titulo{Sistema de ensayos de relés ferroviarios de seguridad basado en computación en la nube}
 
@@ -65,9 +67,15 @@
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios realizados} & Fecha      \\ \hline
-1.0      & Creación del documento: propósito, alcance, supuestos\newline                                                        y tareas & 09/07/2020 \\ \hline
+1.0      & Creación del documento: propósito, alcance, supuestos\newline                                                        y tareas. & 09/07/2020 \\ \hline
 1.1      & Se agrega AoN, diagrama Gantt, matriz de recursos,\newline
-presupuesto y matriz de responsabilidades & 30/07/2020 \\ \hline
+presupuesto y matriz de responsabilidades. & 30/07/2020 \\ \hline
+1.2      & Se agrega Gestión de riesgos, calidad y compras, comunicación \newline
+del proyecto, seguimiento y proceso de cierre. \newline 
+Se cambia ``sistema'' por ``firmware'' en los requerimientos. \newline
+Se agrega transformador al presupuesto. \newline
+Se corrigen requerimientos. \newline
+Se agrega entregable (informe de ensayos). & 08/08/2020 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -189,27 +197,27 @@ En la entrega final no se incluirá el desarrollo de hardware del probador ni el
 \begin{enumerate}
 \item Interfaces Externas
 	\begin{enumerate}
-	\item El sistema deberá ser capaz de leer el estado de 5 señales digitales.
-	\item El sistema deberá leer 15 señales analógicas a través de 2 integrados ADC externos.
-	\item El sistema deberá leer 2 señales analógicas a través de 2 ADC internos.
-	\item El sistema deberá leer el estado de un pin digital.
-	\item El sistema deberá controlar el estado de 2 pines digitales.
-	\item El sistema deberá comunicarse con la tarjeta MicroSD presente en el hardware.
-	\item El sistema deberá hacer uso de un puerto Ethernet para conectarse a Internet.
-	\item El sistema deberá ser capaz de generar una rampa de tensión configurable.
+	\item El firmware deberá ser capaz de leer el estado de 5 señales digitales.
+	\item El firmware deberá leer 15 señales analógicas a través de 2 integrados ADC externos.
+	\item El firmware deberá leer 2 señales analógicas a través de 2 ADC internos.
+	\item El firmware deberá leer el estado de un pin digital.
+	\item El firmware deberá controlar el estado de 2 pines digitales.
+	\item El firmware deberá comunicarse con la tarjeta MicroSD presente en el hardware.
+	\item El firmware deberá hacer uso de un puerto Ethernet para conectarse a Internet.
+	\item El firmware deberá ser capaz de generar una rampa de tensión configurable.
 	\end{enumerate}
 \item Funciones
 	\begin{enumerate}
-	\item El sistema debe ser capaz de enviar notificaciones de alerta al servidor remoto, generadas por el disparo de una señal de alerta del hardware.
-	\item El sistema debe ser capaz de enviar notificaciones de alerta al servidor remoto, generadas por sobretensión en cualquiera de las entradas analógicas.
-	\item El sistema debe ser capaz de interpretar los siguientes comandos enviados desde el servidor:
+	\item El firmware debe ser capaz de enviar notificaciones de alerta al servidor remoto, generadas por el disparo de una señal de alerta del hardware.
+	\item El firmware debe ser capaz de enviar notificaciones de alerta al servidor remoto, generadas por sobretensión en cualquiera de las entradas analógicas.
+	\item El firmware debe ser capaz de interpretar los siguientes comandos enviados desde el servidor:
 		\begin{enumerate}
 		\item Aplicar configuración de sistema.
 		\item Definir los parámetros asociados a cada tipo de ensayo.
 		\item Disparar ensayos.
 		\item Parar ensayos.
 		\end{enumerate}
-	\item El sistema deberá ser capaz de ejecutar los siguientes ensayos:
+	\item El firmware deberá ser capaz de ejecutar los siguientes ensayos:
 		\begin{enumerate}
 		\item \textbf{Sistema magnético, corriente de excitación y corriente de caída:} Se genera una rampa de tensión de pendiente positiva y luego otra de pendiente negativa. El valor inicial, valor final, paso de tensión y duración del paso de las señales deben ser configurables en ambos casos, además de la máxima corriente de excitación admitida. Se debe notificar al servidor entre paso y paso, indicando la tensión instantánea de la rampa y el valor de las 17 señales analógicas. La prueba finaliza al completarse la cantidad de repeticiones especificadas al inicio de la prueba.
 		\item \textbf{Ensayo de vida útil mecánica con y sin carga:} Se debe especificar el número de ciclos. Al detectarse la secuencia de inicio se comienzan a contabilizar los ciclos, representados por el periodo entre cada secuencia de inicio. Se debe notificar al servidor cada vez que ocurre un flanco positivo de las señales CLOCK\_1S o CLOCK\_3S, indicando el número de ciclo y el valor de las 17 señales analógicas. La prueba finaliza al completarse la cantidad de ciclos especificados al inicio de la prueba.
@@ -217,8 +225,8 @@ En la entrega final no se incluirá el desarrollo de hardware del probador ni el
 	\item Junto con cada paquete de datos generado a partir de una prueba, se debe anexar un ID que identifique el tipo de prueba.
 	\item Junto con cada paquete de datos se debe anexar una marca temporal y un ID que identifique a la placa dentro de las tres placas que conforman el sistema.
 	\item Cada paquete de datos debe ser almacenado en una tarjeta MicroSD a modo de copia de seguridad.
-	\item El sistema debe permitir realizar distintos tipos de ensayos en forma intercalada.
-	\item El sistema debe permitir configurar los siguientes parámetros:
+	\item El firmware debe permitir realizar distintos tipos de ensayos en forma intercalada.
+	\item El firmware debe permitir configurar los siguientes parámetros:
 		\begin{enumerate}
 		\item Hora del sistema.
 		\item URL y puerto del broker MQTT.
@@ -244,9 +252,9 @@ En la entrega final no se incluirá el desarrollo de hardware del probador ni el
 	\end{enumerate}
 \item Atributos del Sistema
 	\begin{enumerate}
-	\item El sistema debe ser capaz de funcionar de forma ininterrumpida durante 2 años.
-	\item El sistema debe hacer uso de cifrado TLS para la capa de transporte.
-	\item El sistema debe hacer uso de Usuario/Contraseña para autenticarse con el broker MQTT.
+	\item El firmware debe ser capaz de recuperarse ante una falla que provoque el reinicio del microcontrolador, en un tiempo menor a los 3 segundos y retomar los ensayos en curso.
+	\item El firmware debe hacer uso de cifrado TLS para la capa de transporte.
+	\item El firmware debe hacer uso de Usuario/Contraseña para autenticarse con el broker MQTT.
 	\item El desarrollo de software debe seguir una metodología acorde a la norma UNE-EN 50128.
 	\end{enumerate}
 \item Otros Requisitos
@@ -295,6 +303,7 @@ En la entrega final no se incluirá el desarrollo de hardware del probador ni el
 \item Código fuente del firmware
 \item Informe de avance
 \item Memoria del trabajo
+\item Informes de ensayos
 \end{itemize}
 
 \section{6. Desglose del trabajo en tareas}
@@ -426,9 +435,10 @@ Descripción &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
-CIAA-NXP                 & 1        & \$ 25.600  & \$ 25.600  \\  \hline
-Poncho Probador de relés & 1        & \$ 12.693        & \$ 12.693     \\ \hline
-Mano de obra             & 687 hs   & \$ 850     & \$ 583.950 \\ \hline
+CIAA-NXP                    & 1        & \$ 25.600  & \$ 25.600  \\  \hline
+Poncho Probador de relés    & 1        & \$ 12.693  & \$ 12.693  \\ \hline
+Transformador 220VAC/12VAC  & 1        & \$ 918     & \$ 918     \\ \hline
+Mano de obra                & 687 hs   & \$ 850     & \$ 583.950 \\ \hline
 \multicolumn{3}{|c|}{SUBTOTAL} &
   \multicolumn{1}{c|}{\$ 622.243} \\ \hline
 \rowcolor[HTML]{C0C0C0} 
@@ -519,115 +529,174 @@ Referencias:
 \section{12. Gestión de riesgos}
 \label{sec:riesgos}
 
-\begin{consigna}{red}
-a) Identificación de los riesgos (al menos cinco) y estimación de sus consecuencias:
- 
-Riesgo 1: detallar el riesgo (riesgo es algo que si ocurre altera los planes previstos)
-\begin{itemize}
-\item Severidad (S): mientras más severo, más alto es el número (usar números del 1 al 10).\\
-Justificar el motivo por el cual se asigna determinado número de severidad (S).
-\item Probabilidad de ocurrencia (O): mientras más probable, más alto es el número (usar del 1 al 10).\\
-Justificar el motivo por el cual se asigna determinado número de (O). 
-\end{itemize}   
+\subsection*{12.1. Identificación de riesgos y estimación de sus consecuencias}
 
-Riesgo 2:
+\begin{tcolorbox}
+\textbf{Riesgo 1: avería de la CIAA o del poncho}
 \begin{itemize}
-\item Severidad (S): 
-\item Ocurrencia (O):
+	\item \textit{Severidad: 8} - Dificultaría la implementación del firmware y sería necesario reponer el hardware para continuar con el desarrollo.
+	\item \textit{Ocurrencia: 2} - Solo se interactuará con el hardware a través del firmware. Es poco probable que se dañe el equipamiento.
 \end{itemize}
+\end{tcolorbox}
 
-Riesgo 3:
+\begin{tcolorbox}
+\textbf{Riesgo 2: Errores en el diseño de hardware del probador}
 \begin{itemize}
-\item Severidad (S): 
-\item Ocurrencia (O):
+	\item \textit{Severidad: 6} - Dificultaría las pruebas para validar el correcto funcionamiento del firmware. 
+	\item \textit{Ocurrencia: 2} - El hardware fue probado exhaustivamente, por lo que es poco probable que surjan nuevos errores de diseño.
 \end{itemize}
+\end{tcolorbox}
 
+\begin{tcolorbox}
+\textbf{Riesgo 3: Demoras en los tiempos estipulados para cada tarea}
+\begin{itemize}
+	\item \textit{Severidad: 6} - Retrasaría el desarrollo del proyecto. Sin embargo se cuenta con márgenes de tiempo, por lo que no sería un problema, siempre y cuando las demoras no sean excesivas.
+	\item \textit{Ocurrencia: 8} - Dada la poca experiencia en planificación de proyectos, existe una alta probabilidad de que los tiempos no hayan sido correctamente estimados.
+\end{itemize}
+\end{tcolorbox}
 
-b) Tabla de gestión de riesgos:      (El RPN se calcula como RPN=SxO)
+\begin{tcolorbox}
+\textbf{Riesgo 4: Dificultades en el desarrollo del driver de red}
+\begin{itemize}
+	\item \textit{Severidad: 10} - Se estima que el driver de red junto con el stack TCP/IP es el módulo mas complejo en todo el diseño. No lograr implementar dicho módulo haría imposible conseguir los objetivos planteados.
+	\item \textit{Ocurrencia: 2} - Si bien el manejo del hardware de red se presenta como una tarea compleja, se cuenta con el soporte de la comunidad de desarrolladores en torno a la CIAA.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\textbf{Riesgo 5: No lograr que el firmware cumpla con los requisitos de rendimiento}
+\begin{itemize}
+	\item \textit{Severidad: 8} - En caso de que no se logre realizar la lectura de todas las señales analógicas y el envío del paquete al servidor entre ciclo y ciclo, será necesario recurrir a un microprocesador de mayores prestaciones.
+	\item \textit{Ocurrencia: 2} - Se estima que el microprocesador de la CIAA-NXP cuenta con capacidad de sobra para realizar las tareas mencionadas con la frecuencia requerida.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{12.2. Tabla de gestión de riesgos}
 
 \begin{table}[htpb]
 \centering
-\begin{tabularx}{\linewidth}{@{}|X|c|c|c|c|c|c|@{}}
+\begin{tabularx}{\linewidth}{@{}|c|X|c|c|c|c|c|c|@{}}
 \hline
 \rowcolor[HTML]{C0C0C0} 
-Riesgo & S & O & RPN & S* & O* & RPN* \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
+Riegos & Detalle                                                            & S  & O & RPN & S* & O* & RPN* \\ \hline
+1      & Avería de la CIAA o el poncho                                      & 8  & 2 & 16  &    &    &      \\ \hline
+2      & Errores en el diseño de hardware del probador                      & 6  & 2 & 12  &    &    &      \\ \hline
+3      & Demoras en los tiempos estipulados para cada tarea                 & 6  & 8 & 48  & 6  & 4  & 24   \\ \hline
+4      & Dificultades en el desarrollo del driver de red                    & 10 & 2 & 20  &    &    &      \\ \hline
+5      & No lograr que el firmware cumpla con los requisitos de rendimiento & 8  & 2 & 16  &    &    &      \\ \hline
 \end{tabularx}%
 \end{table}
 
 Criterio adoptado: 
-Se tomarán medidas de mitigación en los riesgos cuyos números de RPN sean mayores a ....
+Se tomarán medidas de mitigación en los riesgos cuyos números de RPN sean mayores a \textbf{40}.
 
 Nota: los valores marcados con (*) en la tabla corresponden luego de haber aplicado la mitigación.
 
-c) Plan de mitigación de los riesgos que originalmente excedían el RPN máximo establecido:
- 
-Riesgo 1: Plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
-  Nueva asignación de S y O, con su respectiva justificación:
-  - Severidad (S): mientras más severo, más alto es el número (usar números del 1 al 10).
-          Justificar el motivo por el cual se asigna determinado número de severidad (S).
-  - Probabilidad de ocurrencia (O): mientras más probable, más alto es el número (usar del 1 al 10).
-          Justificar el motivo por el cual se asigna determinado número de (O).
+\subsection*{12.3. Plan de mitigación de riesgos}
 
-Riesgo 2: Plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
- 
-Riesgo 3: Plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación)
-
-\end{consigna}
-
+\begin{tcolorbox}
+\textbf{Riesgo 3: Demoras en los tiempos estipulados para cada tarea}
+\begin{itemize}
+	\item \textit{Plan de mitigación: } Reveer el plan de trabajo y aumentar las horas dedicadas al proyecto.
+	\item \textit{Severidad: 6} - Retrasaría el desarrollo del proyecto. Sin embargo se cuenta con márgenes de tiempo, por lo que no sería un problema, siempre y cuando las demoras no sean excesivas. Se mantiene la severidad.
+	\item \textit{Ocurrencia: 4} - Si se aumentan las horas de trabajo disminuye la probabilidad de tener demoras.
+\end{itemize}
+\end{tcolorbox}
 
 \section{13. Gestión de la calidad}
 \label{sec:calidad}
 
-\begin{consigna}{red}
-Para cada uno de los requerimientos del proyecto indique:
-\begin{itemize} 
-\item Req \#1: Copiar acá el requerimiento.
+\begin{tcolorbox}
+\textit{1. Interfaces Externas} \\ \\
+	\textbf{Verificación:} Durante la fase de Pruebas preliminares, se desarrollará un prototipo de firmware que haga uso de todos los periféricos mencionados. De esta forma se verificará el correcto funcionamiento de los mismos. \\
+	\textbf{Validación:} Se mostrará este firmware funcionando al \supname , quién validará o no el funcionamiento de los periféricos. \\
+\end{tcolorbox}
 
-Verificación y validación:
+\begin{tcolorbox}	
+\textit{2.1 El firmware debe ser capaz de enviar notificaciones de alerta al servidor remoto, generadas por el disparo de una señal de alerta del hardware.} \\ \\
+\textit{2.2 El firmware debe ser capaz de enviar notificaciones de alerta al servidor remoto, generadas por sobretensión en cualquiera de las entradas analógicas.} \\ 	\\
+\textit{2.3 El firmware debe ser capaz de interpretar los siguientes comandos enviados desde el servidor:
+		\begin{itemize}
+		\item Aplicar configuración de sistema.
+		\item Definir los parámetros asociados a cada tipo de ensayo.
+		\item Disparar ensayos.
+		\item Parar ensayos. \\
+		\end{itemize}}
+	\textit{2.5 Junto con cada paquete de datos generado a partir de una prueba, se debe anexar un ID que identifique el tipo de prueba.} \\ \\
+	\textit{2.6 Junto con cada paquete de datos se debe anexar una marca temporal y un ID que identifique a la placa dentro de las tres placas que conforman el sistema.} \\ \\
+	\textit{2.9 El firmware debe permitir configurar los siguientes parámetros:
+		\begin{itemize}
+		\item Hora del sistema.
+		\item URL y puerto del broker MQTT. \\
+		\end{itemize}}
+	\textbf{Verificación:} Se acordará con los Ingenieros Gustavo Ramoscelli y Nicolás Locatelli, encargados del desarrollo de la aplicación servidor, las pruebas a realizar para el envío de mensajes de alerta, así como la recepción por parte del firmware de los comandos mencionados. \\
+	\textbf{Validación:} Una vez realizada la verificación y con el firmware completamente implementado, en el marco de los Ensayos funcionales, se validará la comunicación con el servidor. \\
+\end{tcolorbox}
 
-\begin{itemize}
-\item Verificación para confirmar si se cumplió con lo requerido antes de mostrar el sistema al cliente:\\
-Detallar 
-\item Validación con el cliente para confirmar que está de acuerdo en que se cumplió con lo requerido:\\
-Detallar  
-\end{itemize}
+\begin{tcolorbox}
+	\textit{2.4 El firmware deberá ser capaz de ejecutar los siguientes ensayos: (ver requerimientos)} \\ \\
+	\textit{2.8 El firmware debe permitir realizar distintos tipos de ensayos en forma intercalada.} \\ \\
+	\textbf{Verificación:} Se conectará un relé de baja intensidad en los terminales de prueba y se corroborará que las secuencias de ensayo se desarrollen correctamente. \\
+	\textbf{Validación:} Se conectará el hardware en su totalidad y se lo hará funcionar durante un tiempo prolongada, verificando en todo momento el correcto funcionamiento del mismo. \\
+\end{tcolorbox}
 
-\end{itemize}
+\begin{tcolorbox}
+	\textit{2.7 Cada paquete de datos debe ser almacenado en una tarjeta MicroSD a modo de copia de seguridad.} \\ \\
+	\textbf{Verificación:} Al finalizar las pruebas de verificación del requerimiento 2.4, se corroborará que los archivos almacenados en la SD y los datos almacenados en el servidor coincidan. \\
+	\textbf{Validación:} Se llevará a cabo el mismo procedimiento que para la verificación pero con la totalidad del hardware funcionando. \\
+\end{tcolorbox}
 
-Tener en cuenta que en este contexto se pueden mencionar simulaciones, cálculos, revisión de hojas de datos, consulta con expertos, etc.
+\begin{tcolorbox}
+	\textit{3.1 Para el ensayo de rampa se deben permitir hasta 25 ciclos.} \\ \\	
+	\textit{3.2 Para el ensayo de vida útil mecánica \textbf{sin carga} se deben permitir hasta $10 \cdot 10^6$ ciclos.} \\ \\
+	\textit{3.3 Para el ensayo de vida útil mecánica \textbf{con carga} se deben permitir hasta $2 \cdot 10^6$ ciclos.} \\ \\
+	\textit{3.4 Para el ensayo de vida útil mecánica el periodo máximo entre ciclos es de 3 segundos.} \\ \\
+	\textbf{Verificación:} Se verificará por revisión de diseño que el firmware sea capaz de manejar la cantidad máxima estipulada de ciclos. Para ello se tendrá en cuenta el tamaño de las variables utilizadas, además del diseño de los algoritmos encargados del control de los ensayos. \\
+	\textbf{Validación:} - \\
+\end{tcolorbox}
 
-\end{consigna}
+\begin{tcolorbox}	
+	\textit{5.1 El firmware debe ser capaz de recuperarse ante una falla que provoque el reinicio del microcontrolador, en un tiempo menor a los 3 segundos y retomar los ensayos en curso.} \\ \\
+	\textbf{Verificación:} Se corroborará que el tiempo de inicialización del firmware sea menor al estipulado. \\
+	\textbf{Validación:} Se producirán fallas intencionales que provoquen el reinicio del microcontrolador y se medirá el tiempo necesario para dicho reinicio.\\
+\end{tcolorbox}	
+
+\begin{tcolorbox}	
+	\textit{5.2 El firmware debe hacer uso de cifrado TLS para la capa de transporte.} \\ \\
+	\textit{5.3 El firmware debe hacer uso de Usuario/Contraseña para autenticarse con el broker MQTT.} \\ \\
+	\textbf{Verificación:} Una vez configurado el servidor para que solo acepte conexiones que utilicen cifrado TLS y el broker para que utilice autenticación por Usuario/Contraseña, se intentará establecer comunicación con el mismo. \\
+	\textbf{Validación:} Se utilizará la herramienta de software Wireshark para corroborar que los paquetes enviados desde el firmware estén cifrados. \\
+\end{tcolorbox}
+	
+\begin{tcolorbox}
+	\textit{6.1 El desarrollo debe ser documentado utilizando la herramienta Doxygen.} \\ \\
+	\textbf{Verificación:} Se irán generando documentaciones intermedias a lo largo del desarrollo. \\
+	\textbf{Validación:} Al finalizar el desarrollo se generará la documentación en alguno de los formatos soportados por la herramienta. \\
+\end{tcolorbox}
+
 
 \section{14. Comunicación del proyecto}
 \label{sec:comunicaciones}
 
-\begin{consigna}{red}
-El plan de comunicación del proyecto es el siguiente:
-\end{consigna}
+A continuación se detalla el plan de comunicación del proyecto:
 
 % Please add the following required packages to your document preamble:
 % \usepackage{graphicx}
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-\begin{table}[htpb]
+\begin{table}[H]
 \centering
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{|c|c|c|c|c|c|}
+\begin{tabular}{|m{3cm}|m{3cm}|m{3cm}|c|c|c|}
 \hline
 \rowcolor[HTML]{C0C0C0} 
 \multicolumn{6}{|c|}{\cellcolor[HTML]{C0C0C0}PLAN DE COMUNICACIÓN DEL PROYECTO}           \\ \hline
 \rowcolor[HTML]{C0C0C0} 
 ¿Qué comunicar? & Audiencia & Propósito & Frecuencia & Método de comunicac. & Responsable \\ \hline
-                &           &           &            &                      &             \\ \hline
-                &           &           &            &                      &             \\ \hline
-                &           &           &            &                      &             \\ \hline
-                &           &           &            &                      &             \\ \hline
-                &           &           &            &                      &             \\ \hline
+Plan de Proyecto & Profesores de GdP, Director y Codirector del proyecto & Informar sobre el plan y la metodología de trabajo & Una única vez & Correo electrónico & \authorname \\ \hline
+Desarrollo del módulo de red & Encargados del desarrollo web & Informar a los interesados sobre la disponibilidad del módulo de red para realizar pruebas & Una única vez & Correo electrónico & \authorname \\ \hline
+Avances en las interfaces con el hardware & \supname & Verificar el correcto funcionamiento del hardware & Semanal & Correo electrónico & \authorname \\ \hline
+Presentación final & Director y codirector del proyecto y director de la Especialización & Informar sobre la finalización del proyecto & Una única vez & Correo electrónico & \authorname \\ \hline
 \end{tabular}%
 }
 \end{table}
@@ -635,55 +704,74 @@ El plan de comunicación del proyecto es el siguiente:
 \section{15. Gestión de Compras}
 \label{sec:compras}
 
-\begin{consigna}{red}
-En caso de tener que comprar elementos o contratar servicios:
-a) Explique con qué criterios elegiría a un proveedor.
-b) Redacte el Statement of Work correspondiente.
-\end{consigna}
+\textit{No se realizarán compras durante el desarrollo del proyecto.}
 
 \section{16. Seguimiento y control}
 \label{sec:seguimiento}
 
-\begin{consigna}{red}
-Para cada tarea del proyecto establecer la frecuencia y los indicadores con los se seguirá su avance y quién será el responsable de hacer dicho seguimiento y a quién debe comunicarse la situación (en concordancia con el Plan de Comunicación del proyecto).
-
-El indicador de avance tiene que ser algo medible, mejor incluso si se puede medir en \% de avance. Por ejemplo,se pueden indicar en esta columna cosas como ``cantidad de conexiones ruteadeas'' o ``cantidad de funciones implementadas'', pero no algo genérico y ambiguo como ``\%'', porque el lector no sabe porcentaje de qué cosa.
-
-\end{consigna}
-
-\begin{table}[!htpb]
+\begin{table}[H]
 \centering
-\begin{tabularx}{\linewidth}{@{}|X|X|X|X|X|X|@{}}
+\begin{tabularx}{\linewidth}{@{}|c|m{5cm}|m{2cm}|X|X|@{}}
 \hline
 \rowcolor[HTML]{C0C0C0} 
-\multicolumn{6}{|c|}{\cellcolor[HTML]{C0C0C0}SEGUIMIENTO DE AVANCE}                                                                       \\ \hline
+\multicolumn{5}{|c|}{\cellcolor[HTML]{C0C0C0}SEGUIMIENTO DE AVANCE}                                                                       \\ \hline
 \rowcolor[HTML]{C0C0C0} 
-Tarea del WBS & Indicador de avance & Frecuencia de reporte & Resp. de seguimiento & Persona a ser informada & Método de comunic. \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
+Tarea del WBS & Indicador de avance & Frecuencia de reporte & Persona a ser informada & Método de comunic. \\ \hline 
+1.1 & Cantidad de documentos leídos & Semanal & \supname & Correo electrónico  \\ \hline
+1.2 & Cantidad de secciones redactadas & Bimensual & \supname & Correo electrónico \\ \hline
+2.1 & Cantidad de módulos implementados & Bimensual & \supname & Correo electrónico \\ \hline
+2.2 & Interfaces de hardware testeadas & Semanal & \supname & Correo electrónico \\ \hline
+2.3 & Cantidad archivos JSON implementados & Semanal & Ing. Gustavo Ramoscelli, Ing. Nicolás Locatelli & Grupo de chat \\ \hline
+3.1 & Cantidad de módulos diseñados & Semanal & \cosupname & Correo electrónico \\ \hline
+3.2 & Cantidad de tareas diseñadas & Semanal & \cosupname & Correo electrónico \\ \hline
+3.3 & - & - & - & - \\ \hline
+3.4 & - & - & - & - \\ \hline
+4.1 & Cantidad de líneas de código escritas & Semanal & \cosupname , \supname & Correo electrónico \\ \hline
+4.2 & Cantidad de líneas de código escritas & Semanal & \cosupname , \supname & Correo electrónico \\ \hline
+4.3 & Cantidad de líneas de código escritas & Semanal & \cosupname & Correo electrónico \\ \hline
+4.4 & Cantidad de líneas de código escritas & Semanal & \cosupname & Correo electrónico \\ \hline
 \end{tabularx}%
 %}
 \end{table}
 
+\begin{table}[H]
+\centering
+\begin{tabularx}{\linewidth}{@{}|c|m{5cm}|m{2cm}|X|X|@{}}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{5}{|c|}{\cellcolor[HTML]{C0C0C0}SEGUIMIENTO DE AVANCE}                                                                       \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Tarea del WBS & Indicador de avance & Frecuencia de reporte & Persona a ser informada & Método de comunic. \\ \hline 
+4.5 & Cantidad de líneas de código escritas & Semanal & \cosupname & Correo electrónico \\ \hline
+4.6 & Cantidad de líneas de código escritas & Semanal & \supname & Correo electrónico \\ \hline
+4.7 & Cantidad de líneas de código escritas & Semanal & \cosupname & Correo electrónico \\ \hline
+5.1 & Cantidad de módulos probados & Semanal & \cosupname & Correo electrónico \\ \hline
+5.2 & Cantidad de módulos integrados & Semanal & \cosupname & Correo electrónico \\ \hline
+5.3 & Cantidad de bloques de hardware probados & Semanal & \supname & Correo electrónico \\ \hline
+5.4 & Cantidad de ensayos realizadas & Semanal & \supname , \clientename  & Correo electrónico \\ \hline
+5.5 & Cantidad de ensayos realizados & Semanal & \cosupname & Correo electrónico \\ \hline
+5.6 & - & - & - & - \\ \hline
+5.7 & Cantidad de páginas escritas & Semanal & \supname & Correo electrónico \\ \hline
+6.1 & Cantidad de páginas escritas & Bimensual & \supname & Correo electrónico \\ \hline
+6.2 & Cantidad de slides producidos & Semanal & \supname & Correo electrónico \\ \hline
+\end{tabularx}%
+%}
+\end{table}
+
+\textit{El responsable de llevar a cabo el seguimiento de todas las tareas será el \authorname}.
+
 \section{17. Procesos de cierre}    
 \label{sec:cierre}
 
-\begin{consigna}{red}
-Establecer las pautas de trabajo para realizar una reunión final de evaluación del proyecto, tal que contemple las siguientes actividades:
+A continuación se detallan las pautas para llevar a cabo la reunión final de evaluación del proyecto:
 
 \begin{itemize}
-\item Pautas de trabajo que se seguirán para analizar si se respetó el Plan de Proyecto original:
- - Indicar quién se ocupará de hacer esto y cuál será el procedimiento a aplicar. 
-\item Identificación de las técnicas y procedimientos útiles e inútiles que se utilizaron, y los problemas que surgieron y cómo se solucionaron:
- - Indicar quién se ocupará de hacer esto y cuál será el procedimiento para dejar registro.
-\item Indicar quién organizará el acto de agradecimiento a todos los interesados, y en especial al equipo de trabajo y colaboradores:
-  - Indicar esto y quién financiará los gastos correspondientes.
+\item Se contrastará el cronograma estimativo presentado en secciones precedentes con el cronograma real, actualizado a lo largo del desarrollo. Al final se realizará un informe que de cuenta de las principales divergencias entre el plan y la realidad. \\
+\textbf{Responsable:} \authorname
+\item A partir del informe detallado en el punto anterior, se analizarán cuáles son las tareas y actividades que tuvieron mayor impacto en las eventuales demoras y cómo se podría haber minimizado dicho impacto. \\
+\textbf{Responsable:} \authorname
+\item A modo de agradecimiento a los involucrados, además de mencionarlos como partícipes claves en el desarrollo durante la presentación final del proyecto, se los invitará a formar parte de la misma. \\
+\textbf{Responsable:} \authorname
 \end{itemize}
-
-\end{consigna}
-
 
 \end{document}
